@@ -5,14 +5,37 @@
   right: 0;
   z-index: 999;
   background-color: transparent;
-  transition: all var(--transition-base);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: var(--space-lg) 0;
 }
 
+/* Dark theme - not scrolled */
+[data-theme="dark"] .header:not(.scrolled) {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Light theme - not scrolled */
+[data-theme="light"] .header:not(.scrolled) {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Dark theme - scrolled */
+[data-theme="dark"] .header.scrolled {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Light theme - scrolled */
+[data-theme="light"] .header.scrolled {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 .header.scrolled {
-  background-color: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 var(--color-border);
   padding: var(--space-md) 0;
 }
 
@@ -157,9 +180,9 @@
     gap: var(--space-md);
   }
 
-  /* Hide desktop theme toggle on mobile */
+  /* Keep theme toggle visible on mobile */
   .header-right > .theme-toggle {
-    display: none;
+    display: flex;
   }
 
   .mobile-menu-button {
@@ -168,6 +191,11 @@
 
   .mobile-nav {
     display: flex;
+  }
+
+  /* Hide theme toggle inside mobile menu since it's in header */
+  .mobile-theme-toggle {
+    display: none;
   }
 
   .header.scrolled {
