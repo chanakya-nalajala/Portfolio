@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "./context/ThemeContext";
+import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Highlights from "./components/Highlights";
 import Expertise from "./components/Expertise";
@@ -10,7 +11,6 @@ import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ThemeToggle from "./components/ThemeToggle";
 import { resumeData } from "./data/resume";
 import "./App.css";
 
@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <div className="app">
-        <ThemeToggle />
+        <Header name={resumeData.personal.name} />
 
         <Hero data={resumeData.personal} />
         <Highlights highlights={resumeData.highlights} />
