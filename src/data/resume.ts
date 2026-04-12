@@ -5,61 +5,61 @@ export const resumeData: ResumeData = {
     name: "Chanakya Nalajala",
     title: "Senior Java Full-Stack Engineer",
     subtitle:
-      "Enterprise Applications • Spring Boot • Microservices • Platform Migrations",
+      "Building enterprise systems that actually work in production",
     location: "Hyderabad, India",
     email: "chanakya.180@gmail.com",
     phone: "+91 9490375485",
     linkedin: "https://www.linkedin.com/in/chanakya-nalajala/",
     github: "https://github.com/chanakya",
     summary:
-      "Senior Java Full-Stack Engineer with 6+ years building and modernizing enterprise-grade applications. Expert in Spring Boot (monolith to microservices), large-scale platform migrations, and performance optimization. Led Spring Boot 2.x → 3.x and Angular 10 → 20 migrations while improving system performance by 35%.",
+      "I've spent the last 6+ years building and fixing enterprise Java applications. Recently migrated a monolith to Spring Boot 3.x and Angular 20, cutting API response times by 35%. I enjoy solving performance bottlenecks and making legacy code work better.",
     headline:
-      "Enterprise Java Engineer specializing in Spring Boot & Platform Modernization",
+      "I build Java applications and make them fast",
   },
 
   highlights: [
     {
       number: "6+",
-      label: "Years Enterprise Java",
-      subtext: "Production Systems",
+      label: "Years",
+      subtext: "Java & Spring Boot",
     },
     {
       number: "35%",
-      label: "Performance Gain",
-      subtext: "API Response Time",
+      label: "Faster",
+      subtext: "After optimization",
     },
     {
-      number: "2→3",
-      label: "Spring Boot Migration",
-      subtext: "Zero Downtime",
+      number: "0",
+      label: "Downtime",
+      subtext: "During migrations",
     },
     {
-      number: "10→20",
-      label: "Angular Migration",
-      subtext: "Complete Modernization",
+      number: "8",
+      label: "Services",
+      subtext: "Migrated to Spring 3.x",
     },
   ],
 
   expertiseAreas: [
     {
-      title: "Enterprise Java & Spring Ecosystem",
+      title: "Java & Spring Boot",
       icon: "☕",
       description:
-        "Spring Boot 3.x, Spring Security, Spring Data JPA, Hibernate 6, Microservices Architecture, Monolith to Microservices Migration",
+        "Working with Spring Boot 3.x, Security, JPA/Hibernate, and microservices. Recently migrated a monolith and 8 services from Boot 2.x to 3.x with zero downtime.",
       level: "Expert",
     },
     {
-      title: "Platform Modernization & Migrations",
-      icon: "🔄",
+      title: "Making Old Code Work Better",
+      icon: "🔧",
       description:
-        "Led major version upgrades: Spring Boot 2.x → 3.x (Jakarta EE), Angular 10 → 20, Database migrations, Zero-downtime deployments",
+        "Platform migrations are my thing. Spring Boot 2→3, Angular 10→20, Jakarta EE migrations. Always with zero downtime because production doesn't sleep.",
       level: "Expert",
     },
     {
-      title: "Performance & Scalability",
+      title: "Performance Tuning",
       icon: "⚡",
       description:
-        "N+1 query elimination, Multi-level caching (Redis/Ehcache), Native SQL optimization, Connection pooling, Async processing",
+        "Fixed N+1 queries, added caching (Redis/Ehcache), optimized SQL. Cut response times by 35% in my current role. Sometimes the simple fixes make the biggest difference.",
       level: "Expert",
     },
     {

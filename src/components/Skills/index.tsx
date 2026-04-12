@@ -46,10 +46,9 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Technical Skills</h2>
+          <h2 className="section-title">Tech Stack</h2>
           <p className="section-description">
-            Comprehensive technology stack for enterprise application
-            development
+            Tools I use regularly and actually know how to use
           </p>
         </motion.div>
 

@@ -36,10 +36,9 @@ const Expertise: React.FC<ExpertiseProps> = ({ expertiseAreas }) => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Core Expertise</h2>
+          <h2 className="section-title">What I'm Good At</h2>
           <p className="section-description">
-            Deep knowledge in enterprise Java ecosystem and production-grade
-            system development
+            Things I've done enough times to know the gotchas
           </p>
         </motion.div>
 

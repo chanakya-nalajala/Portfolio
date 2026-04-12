@@ -18,7 +18,7 @@ const EngineeringDepth: React.FC<EngineeringDepthProps> = ({
   return (
     <section className="section engineering-depth" id="engineering">
       <div className="container">
-        <h2 className="section-title">Select Work</h2>
+        <h2 className="section-title">Some Things I've Built</h2>
 
         {sections.map((section) => (
           <div key={section.key} className="depth-section">

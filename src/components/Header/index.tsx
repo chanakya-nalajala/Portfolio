@@ -21,12 +21,10 @@ const Header: React.FC<HeaderProps> = ({ name }) => {
   }, []);
 
   const navItems = [
-    { label: "Expertise", href: "#expertise" },
-    { label: "Migrations", href: "#migrations" },
+    { label: "About", href: "#expertise" },
     { label: "Work", href: "#engineering" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
-    { label: "Experience", href: "#experience" },
     { label: "Contact", href: "#contact" },
   ];
 

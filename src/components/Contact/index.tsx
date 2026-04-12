@@ -18,10 +18,9 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
         >
-          <h2 className="contact-title">Let's Work Together</h2>
+          <h2 className="contact-title">Let's Talk</h2>
           <p className="contact-text">
-            Open to opportunities in enterprise Java development, platform
-            modernization, and technical architecture roles.
+            Open to new roles in Java development, platform migrations, or anything involving making systems faster and more reliable.
           </p>
           <div className="contact-actions">
             <a

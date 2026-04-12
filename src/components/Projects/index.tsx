@@ -36,9 +36,9 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Featured Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <p className="section-description">
-            Production-grade applications solving real business problems
+            Stuff I've worked on that's actually running in production
           </p>
         </motion.div>
 

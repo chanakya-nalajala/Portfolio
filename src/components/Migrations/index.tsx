@@ -34,10 +34,9 @@ const Migrations: React.FC<MigrationsProps> = ({ migrations }) => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Platform Modernization Experience</h2>
+          <h2 className="section-title">Major Migrations I've Done</h2>
           <p className="section-description">
-            Led critical large-scale migrations with zero downtime and
-            significant performance improvements
+            Big version upgrades without breaking production
           </p>
         </motion.div>
 
