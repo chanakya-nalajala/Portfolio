@@ -8,7 +8,7 @@
   gap: var(--space-md);
   margin-bottom: var(--space-xl);
   overflow-x: auto;
-  padding-bottom: var(--space-sm);
+  padding: var(--space-sm) 0;
 }
 
 .migration-tab {
