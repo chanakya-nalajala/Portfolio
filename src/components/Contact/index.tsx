@@ -26,7 +26,7 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
           <div className="contact-actions">
             <a
               href={`mailto:${data.email}`}
-              className="btn btn-primary btn-large"
+              className="btn btn-secondary btn-large"
             >
               Send Email
             </a>

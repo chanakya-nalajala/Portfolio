@@ -58,24 +58,8 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           </motion.p>
 
           <motion.div variants={itemVariants} className="hero-cta">
-            <a href="#contact" className="btn btn-primary">
+            <a href="#contact" className="btn btn-secondary">
               Get In Touch
-            </a>
-            <a
-              href={data.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              LinkedIn →
-            </a>
-            <a
-              href={data.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              GitHub →
             </a>
           </motion.div>
         </motion.div>
