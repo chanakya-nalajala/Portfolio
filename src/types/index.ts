@@ -56,14 +56,6 @@ export interface Project {
   tech: string[];
 }
 
-export interface Experience {
-  title: string;
-  company: string;
-  location: string;
-  period: string;
-  highlights: string[];
-}
-
 export interface Skills {
   backend: string[];
   frontend: string[];
@@ -74,13 +66,6 @@ export interface Skills {
   devops: string[];
 }
 
-export interface Education {
-  degree: string;
-  institution: string;
-  location: string;
-  period: string;
-}
-
 export interface ResumeData {
   personal: PersonalInfo;
   highlights: Highlight[];
@@ -89,6 +74,4 @@ export interface ResumeData {
   engineeringDepth: EngineeringDepth;
   skills: Skills;
   projects: Project[];
-  experience: Experience[];
-  education: Education[];
 }

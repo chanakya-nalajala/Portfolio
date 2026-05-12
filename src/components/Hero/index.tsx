@@ -69,25 +69,17 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             >
               LinkedIn →
             </a>
+            <a
+              href={data.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+            >
+              GitHub →
+            </a>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        <div className="scroll-mouse">
-          <motion.div
-            className="scroll-wheel"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 };

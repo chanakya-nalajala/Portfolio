@@ -81,6 +81,7 @@
 .btn-primary:hover {
   background-color: var(--color-accent-hover);
   transform: translateY(-2px);
+  color: white;
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
@@ -94,30 +95,6 @@
   background-color: var(--color-surface);
   border-color: var(--color-accent);
   transform: translateY(-2px);
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: var(--space-xl);
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.scroll-mouse {
-  width: 24px;
-  height: 40px;
-  border: 2px solid var(--color-text-tertiary);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-}
-
-.scroll-wheel {
-  width: 3px;
-  height: 8px;
-  background-color: var(--color-accent);
-  border-radius: 2px;
 }
 
 @media (max-width: 768px) {
@@ -158,9 +135,5 @@
 
   .hero-headline {
     font-size: 1.5rem;
-  }
-
-  .scroll-indicator {
-    display: none;
   }
 }
