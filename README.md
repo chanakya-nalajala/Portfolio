@@ -63,5 +63,55 @@ git push origin main
 
 The deployment workflow will build your site and publish it to GitHub Pages automatically.
 
+## 📊 Analytics Setup
+
+This portfolio includes comprehensive analytics tracking using **Firebase Analytics** and **Firestore**.
+
+### Features
+- ✅ Page views and session tracking
+- ✅ Visitor location tracking (city, state, country via ipapi)
+- ✅ Device, browser, and OS detection
+- ✅ Engagement metrics (scroll depth, time on page)
+- ✅ Custom event tracking
+
+### Quick Setup for GitHub Pages
+
+1. **Install Firebase:**
+   ```bash
+   npm install firebase
+   ```
+
+2. **Create Firebase project** at https://console.firebase.google.com/
+   - Enable Analytics and Firestore
+
+3. **Add GitHub Secrets** (Settings → Secrets → Actions):
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_FIREBASE_MEASUREMENT_ID`
+
+4. **Create `.env` file for local development:**
+   ```bash
+   cp .env.example .env
+   # Add your Firebase config to .env
+   ```
+
+5. **Push to deploy:**
+   ```bash
+   git push origin master
+   ```
+
+### 📖 Documentation
+
+- **[GITHUB-PAGES-ANALYTICS.md](GITHUB-PAGES-ANALYTICS.md)** ⭐ **START HERE** - GitHub Pages specific setup
+- **[INSTALL-ANALYTICS.md](INSTALL-ANALYTICS.md)** - Detailed installation guide
+- **[ANALYTICS-SETUP.md](ANALYTICS-SETUP.md)** - Features and configuration
+- **[ANALYTICS-SUMMARY.md](ANALYTICS-SUMMARY.md)** - Complete overview
+
+Analytics is **free** within Firebase's generous free tier (perfect for portfolios).
+
 ## Connect
 Feel free to explore the projects showcased here, and connect with me if you have any questions or opportunities!

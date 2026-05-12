@@ -1,14 +1,22 @@
 import React from "react";
 import { useTheme } from "../../context/ThemeContext";
+import { useTrackEvent } from "../../hooks/useAnalytics";
 import "./styles.css";
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { trackTheme } = useTrackEvent();
+
+  const handleToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    toggleTheme();
+    trackTheme(newTheme);
+  };
 
   return (
     <button
       className="theme-toggle"
-      onClick={toggleTheme}
+      onClick={handleToggle}
       aria-label="Toggle theme"
       title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >

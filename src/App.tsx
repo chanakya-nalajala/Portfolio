@@ -1,5 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "./context/ThemeContext";
+import { AnalyticsProvider } from "./context/AnalyticsContext";
+import { usePageView } from "./hooks/useAnalytics";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Highlights from "./components/Highlights";
@@ -13,22 +15,33 @@ import Footer from "./components/Footer";
 import { resumeData } from "./data/resume";
 import "./App.css";
 
+const AppContent: React.FC = () => {
+  // Track page view
+  usePageView("Portfolio", "Chanakya Nalajala - Senior Full-Stack Engineer");
+
+  return (
+    <div className="app">
+      <Header name={resumeData.personal.name} />
+
+      <Hero data={resumeData.personal} />
+      <Highlights highlights={resumeData.highlights} />
+      <Expertise expertiseAreas={resumeData.expertiseAreas} />
+      <Migrations migrations={resumeData.migrations} />
+      <EngineeringDepth engineeringDepth={resumeData.engineeringDepth} />
+      <Projects projects={resumeData.projects} />
+      <Skills skills={resumeData.skills} />
+      <Contact data={resumeData.personal} />
+      <Footer />
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className="app">
-        <Header name={resumeData.personal.name} />
-
-        <Hero data={resumeData.personal} />
-        <Highlights highlights={resumeData.highlights} />
-        <Expertise expertiseAreas={resumeData.expertiseAreas} />
-        <Migrations migrations={resumeData.migrations} />
-        <EngineeringDepth engineeringDepth={resumeData.engineeringDepth} />
-        <Projects projects={resumeData.projects} />
-        <Skills skills={resumeData.skills} />
-        <Contact data={resumeData.personal} />
-        <Footer />
-      </div>
+      <AnalyticsProvider>
+        <AppContent />
+      </AnalyticsProvider>
     </ThemeProvider>
   );
 };
