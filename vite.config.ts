@@ -6,5 +6,5 @@ export default defineConfig({
   plugins: [react()],
   // Set base to your repository name for GitHub Pages
   // Change 'Portfolio' to your actual repository name if different
-  base: '/Portfolio/',
+  base: '/',
 });
