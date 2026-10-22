@@ -181,6 +181,7 @@ ul {
 }
 
 .btn-ghost {
+  background-color: transparent;
   border-color: var(--color-line-strong);
   color: var(--color-text);
 }
@@ -238,4 +239,13 @@ ul {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+.btn-download:hover svg {
+  transform: translateY(2px);
+}
+
+.btn:disabled {
+  cursor: progress;
+  opacity: 0.7;
 }

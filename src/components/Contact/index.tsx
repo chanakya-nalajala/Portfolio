@@ -1,15 +1,17 @@
 import React from "react";
-import type { PersonalInfo } from "../../types";
+import type { PersonalInfo, ResumeData } from "../../types";
 import SectionHeader from "../SectionHeader";
 import Reveal from "../Reveal";
 import { ArrowUpRight } from "../Icons";
+import ResumeDownload from "../ResumeDownload";
 import "./styles.css";
 
 interface ContactProps {
   data: PersonalInfo;
+  resume: ResumeData;
 }
 
-const Contact: React.FC<ContactProps> = ({ data }) => {
+const Contact: React.FC<ContactProps> = ({ data, resume }) => {
   const links = [
     { label: "Email", value: data.email, href: `mailto:${data.email}` },
     {
@@ -62,6 +64,15 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                   </li>
                 );
               })}
+              <li>
+                <ResumeDownload
+                  data={resume}
+                  className="contact-link contact-link-button"
+                  prefix={<span className="mono-label">Resume</span>}
+                  label="Download PDF"
+                  labelClassName="contact-link-value"
+                />
+              </li>
             </ul>
           </Reveal>
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import type { Skills as SkillsType } from "../../types";
 import SectionHeader from "../SectionHeader";
 import Reveal from "../Reveal";
+import { skillCategories } from "../../data/skillCategories";
 import "./styles.css";
 
 interface SkillsProps {
@@ -9,18 +10,6 @@ interface SkillsProps {
 }
 
 const Skills: React.FC<SkillsProps> = ({ skills }) => {
-  const categories: Array<{ name: string; key: keyof SkillsType }> = [
-    { name: "Languages", key: "languages" },
-    { name: "Backend", key: "backend" },
-    { name: "Frontend", key: "frontend" },
-    { name: "Patterns", key: "patterns" },
-    { name: "Security & IAM", key: "security" },
-    { name: "Caching & performance", key: "performance" },
-    { name: "Databases", key: "data" },
-    { name: "DevOps & tooling", key: "devops" },
-    { name: "AI & RAG", key: "ai" },
-  ];
-
   return (
     <section className="section skills" id="skills">
       <div className="container">
@@ -32,7 +21,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
         />
 
         <div className="skills-table">
-          {categories.map((category) => (
+          {skillCategories.map((category) => (
             <Reveal key={category.key} className="skill-row">
               <h3 className="skill-category-name">{category.name}</h3>
               <ul className="tag-list">

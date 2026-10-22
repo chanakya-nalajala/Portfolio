@@ -1,14 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import type { PersonalInfo } from "../../types";
+import type { PersonalInfo, ResumeData } from "../../types";
 import { ArrowRight } from "../Icons";
+import ResumeDownload from "../ResumeDownload";
 import "./styles.css";
 
 interface HeroProps {
   data: PersonalInfo;
+  resume: ResumeData;
 }
 
-const Hero: React.FC<HeroProps> = ({ data }) => {
+const Hero: React.FC<HeroProps> = ({ data, resume }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -67,9 +69,10 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
                 Get in touch
                 <ArrowRight />
               </a>
-              <a href="#projects" className="btn btn-ghost">
-                See projects
-              </a>
+              <ResumeDownload
+                data={resume}
+                className="btn btn-ghost btn-download"
+              />
             </div>
           </motion.div>
         </div>

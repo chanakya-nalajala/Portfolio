@@ -87,3 +87,20 @@
     gap: var(--space-xl);
   }
 }
+
+.contact-link-button {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  cursor: pointer;
+}
+
+.contact-link-button:hover svg {
+  transform: translateY(2px);
+}
+
+.contact-link-button:disabled {
+  cursor: progress;
+}

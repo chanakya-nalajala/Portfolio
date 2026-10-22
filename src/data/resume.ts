@@ -10,6 +10,7 @@ export const resumeData: ResumeData = {
     phone: "+919490375485",
     linkedin: "https://www.linkedin.com/in/chanakya-nalajala/",
     github: "https://github.com/chanakya-nalajala",
+    website: "https://chanakya.got-a.page",
     summary:
       "Lead – Solution Engineer with 6+ years of experience building enterprise-level software products, specializing in Java, Spring Boot, Angular, and React, modernizing enterprise platforms to elevate performance, scalability, and maintainability. Leads a technical vertical of 10+ engineers, owning end-to-end delivery and support across 18+ client accounts. Delivered secure, multi-tenant systems with Keycloak (MFA, PKCE, custom IdPs, RBAC) and multilingual (i18n/RTL) UIs; optimized APIs and native SQL to cut response times by up to 35% and lift operational efficiency 25–30%. Architected Java microservices with Spring Cloud (Gateway, Eureka, Config Server), implementing Saga, CQRS, and event-driven patterns over Kafka. Built AI features (LangChain4j, pgvector, OpenAI), leveraging Redis/Ehcache and Hibernate Envers for caching and auditability.",
     headline:

@@ -22,7 +22,7 @@ const App: React.FC = () => {
         <div className="app">
           <Header name={resumeData.personal.name} />
           <main>
-            <Hero data={resumeData.personal} />
+            <Hero data={resumeData.personal} resume={resumeData} />
             <Highlights highlights={resumeData.highlights} />
             <Experience
               experience={resumeData.experience}
@@ -33,7 +33,7 @@ const App: React.FC = () => {
             <EngineeringDepth engineeringDepth={resumeData.engineeringDepth} />
             <Projects projects={resumeData.projects} />
             <Skills skills={resumeData.skills} />
-            <Contact data={resumeData.personal} />
+            <Contact data={resumeData.personal} resume={resumeData} />
           </main>
           <Footer name={resumeData.personal.name} />
         </div>

@@ -42,6 +42,12 @@ export const ArrowUp: React.FC<IconProps> = (props) => (
   </Svg>
 );
 
+export const Download: React.FC<IconProps> = (props) => (
+  <Svg {...props}>
+    <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+  </Svg>
+);
+
 export const Sun: React.FC<IconProps> = (props) => (
   <Svg {...props}>
     <circle cx="12" cy="12" r="4" />
