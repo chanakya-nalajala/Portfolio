@@ -23,23 +23,31 @@ export const useTheme = (): ThemeContextType => {
   return context;
 };
 
+// index.html sets data-theme before first paint (stored choice, else system preference).
+const getInitialTheme = (): Theme =>
+  document.documentElement.getAttribute("data-theme") === "light"
+    ? "light"
+    : "dark";
+
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    return stored || "dark";
-  });
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = (): void => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Storage unavailable (private mode); the choice just won't persist.
+    }
   };
 
   return (

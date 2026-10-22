@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://chanakya-nalajala.github.io/Portfolio/sitemap.xml
+Sitemap: https://chanakya.got-a.page/sitemap.xml

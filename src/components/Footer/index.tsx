@@ -1,13 +1,22 @@
 import React from "react";
+import { ArrowUp } from "../Icons";
 import "./styles.css";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  name: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ name }) => {
   return (
     <footer className="footer">
-      <div className="container">
+      <div className="container footer-inner">
         <p className="footer-text">
-          © {new Date().getFullYear()} Chanakya Nalajala
+          © {new Date().getFullYear()} {name}
         </p>
+        <a href="#top" className="footer-top mono-label">
+          Back to top
+          <ArrowUp size={14} />
+        </a>
       </div>
     </footer>
   );

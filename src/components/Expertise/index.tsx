@@ -1,6 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import type { ExpertiseArea } from "../../types";
+import SectionHeader from "../SectionHeader";
+import Reveal from "../Reveal";
 import "./styles.css";
 
 interface ExpertiseProps {
@@ -8,64 +9,34 @@ interface ExpertiseProps {
 }
 
 const Expertise: React.FC<ExpertiseProps> = ({ expertiseAreas }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-    },
-  };
-
   return (
     <section className="section expertise" id="expertise">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">What I'm Good At</h2>
-          <p className="section-description">
-            Things I've done enough times to know the gotchas
-          </p>
-        </motion.div>
+        <SectionHeader
+          index="02"
+          label="Expertise"
+          title="What I'm good at"
+          description="Things I've done enough times to know the gotchas."
+        />
 
-        <motion.div
-          className="expertise-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="expertise-grid">
           {expertiseAreas.map((area, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="expertise-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+            <Reveal
+              key={area.title}
+              className="expertise-item"
+              delay={(index % 3) * 0.08}
             >
-              <div className="expertise-header">
-                <span className="expertise-icon">{area.icon}</span>
-                <span className="expertise-level">{area.level}</span>
+              <div className="expertise-meta mono-label">
+                <span className="expertise-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{area.level}</span>
               </div>
               <h3 className="expertise-title">{area.title}</h3>
               <p className="expertise-description">{area.description}</p>
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

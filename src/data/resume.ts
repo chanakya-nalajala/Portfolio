@@ -3,7 +3,7 @@ import type { ResumeData } from "../types";
 export const resumeData: ResumeData = {
   personal: {
     name: "Chanakya Nalajala",
-    title: "Senior Full-Stack Engineer",
+    title: "Lead – Solution Engineer",
     subtitle: "Building enterprise systems that actually work in production",
     location: "Hyderabad, Telangana, India",
     email: "chanakya180@gmail.com",
@@ -11,7 +11,7 @@ export const resumeData: ResumeData = {
     linkedin: "https://www.linkedin.com/in/chanakya-nalajala/",
     github: "https://github.com/chanakya-nalajala",
     summary:
-      "Senior Full-Stack Engineer with more than 6+ years of experience in building enterprise level software products specializing in Java, Spring Boot, Angular, and React, modernizing enterprise platforms to elevate performance, scalability, and maintainability. Delivered secure, multi-tenant systems with Keycloak (MFA, PKCE, custom IdPs, RBAC) and multilingual (i18n/RTL) UIs; optimized APIs and native SQL to cut response times by up to 35% and lift operational efficiency 25–30%. Architected Java microservices with Spring Cloud (Gateway, Eureka, Config Server), implementing Saga, CQRS, and event-driven patterns over Kafka/RabbitMQ. Built configurable workflow orchestration and AI features (LangChain4j, pgvector, OpenAI), leveraging Redis/Ehcache and Hibernate Envers for caching and auditability.",
+      "Lead – Solution Engineer with 6+ years of experience building enterprise-level software products, specializing in Java, Spring Boot, Angular, and React, modernizing enterprise platforms to elevate performance, scalability, and maintainability. Leads a technical vertical of 10+ engineers, owning end-to-end delivery and support across 18+ client accounts. Delivered secure, multi-tenant systems with Keycloak (MFA, PKCE, custom IdPs, RBAC) and multilingual (i18n/RTL) UIs; optimized APIs and native SQL to cut response times by up to 35% and lift operational efficiency 25–30%. Architected Java microservices with Spring Cloud (Gateway, Eureka, Config Server), implementing Saga, CQRS, and event-driven patterns over Kafka. Built AI features (LangChain4j, pgvector, OpenAI), leveraging Redis/Ehcache and Hibernate Envers for caching and auditability.",
     headline:
       "I build scalable full-stack applications with Java, Spring Boot, Angular, and React",
   },
@@ -23,63 +23,136 @@ export const resumeData: ResumeData = {
       subtext: "Java & Spring Boot",
     },
     {
+      number: "10+",
+      label: "Engineers",
+      subtext: "Led in my vertical",
+    },
+    {
+      number: "18+",
+      label: "Client accounts",
+      subtext: "End-to-end delivery",
+    },
+    {
       number: "35%",
       label: "Faster",
-      subtext: "After optimization",
+      subtext: "API response times",
+    },
+  ],
+
+  experience: [
+    {
+      role: "Lead – Solution Engineer",
+      company: "Ascent Business Technologies",
+      location: "Gurugram",
+      start: "Jul 2026",
+      end: "Present",
+      highlights: [
+        "Lead a technical vertical of 10+ direct resources, driving mentorship, performance management, and career growth across the team.",
+        "Own end-to-end technical delivery and support for 18+ client accounts, ensuring SLA compliance, architectural consistency, and quality across concurrent engagements.",
+        "Drive solutioning and technical strategy for new implementations, partnering with stakeholders to define architecture, scope, and delivery roadmaps.",
+        "Establish engineering best practices (code review standards, escalation processes, knowledge-sharing frameworks) to scale delivery across the vertical.",
+        "Architected a new application on industry-standard patterns, achieving optimized P95/P99 latency through distributed caching and event-driven architecture.",
+        "Built reusable custom plugins/components published to a private Nexus repository and streamlined the overall architecture with defined frontend/backend rules and guidelines to enforce coding uniformity across AI coding agents.",
+      ],
     },
     {
-      number: "0",
-      label: "Downtime",
-      subtext: "During migrations",
+      role: "Senior Software Engineer II",
+      company: "Ascent Business Technologies",
+      location: "Gurugram",
+      start: "Jul 2024",
+      end: "Jun 2026",
+      highlights: [
+        "Led full-stack modernization, migrating Spring Boot and Angular, improving performance and maintainability by ~30%.",
+        "Hardened IAM with Keycloak (MFA, PKCE, custom IdPs), enforcing granular RBAC and secure SSO across tenants.",
+        "Delivered secure multi-tenant architecture (shared schema, tenant-aware filters/ACLs) strengthening data segregation and compliance.",
+        "Built React-based admin/dashboard UIs integrated with Spring Boot REST APIs, complementing Angular frontend modules.",
+        "Increased throughput and auditability via Redis/Ehcache caching and Hibernate Envers; optimized hotspots using EntityManager + native SQL.",
+        "Decomposed monolithic modules into Spring Boot microservices using Spring Cloud Gateway and Eureka, applying Saga and CQRS patterns for distributed transaction management.",
+        "Implemented event-driven inter-service communication using Kafka, improving system decoupling and async processing reliability.",
+      ],
     },
     {
-      number: "8",
-      label: "Services",
-      subtext: "Migrated to Spring 3.x",
+      role: "Senior Software Engineer I",
+      company: "Ascent Business Technologies",
+      location: "Gurugram",
+      start: "Sep 2022",
+      end: "Jun 2024",
+      highlights: [
+        "Delivered multilingual Angular apps with i18n and RTL support for Arabic/English, ensuring consistent UX across web and mobile.",
+        "Optimized state management with RxJS/NgRx, boosting responsiveness by 30%.",
+        "Implemented ShedLock and Quartz for background jobs, improving real-time dashboard updates by 25%.",
+        "Eliminated Hibernate N+1 and tuned indexes/execution plans with fetch joins and entity graphs, reducing API response times by ~35%.",
+        "Integrated MIR3, EverBridge, F24, and Twilio for real-time multilingual notifications, increasing engagement by 20%.",
+        "Built real-time dashboards with MITKAT, enhancing data insights for faster decisions.",
+        "Developed a custom Keycloak provider for advanced user/group queries, improving authentication flexibility by 20%.",
+      ],
+    },
+    {
+      role: "Analyst Engineer",
+      company: "Conceptive Consulting",
+      location: "Hyderabad",
+      start: "Mar 2020",
+      end: "Sep 2022",
+      highlights: [
+        "Built and supported enterprise applications using Java (Spring Boot), Angular, React, and React Native.",
+        "Contributed to feature development, bug fixing, performance improvements, and UI enhancements across web and mobile platforms.",
+        "Worked on API integration, authentication/authorization flows, reusable components, and database-driven modules while ensuring clean code, maintainability, and timely delivery in Agile teams.",
+      ],
+    },
+  ],
+
+  education: [
+    {
+      institution: "IEC University",
+      location: "Solan",
+      degree: "Bachelor of Computer Applications",
+      start: "2016",
+      end: "2019",
+    },
+    {
+      institution: "Sathyabama University",
+      location: "Chennai",
+      degree: "Bachelor of Technology (Disc.)",
+      start: "2012",
+      end: "2015",
     },
   ],
 
   expertiseAreas: [
     {
       title: "Java & Spring Boot Microservices",
-      icon: "☕",
       description:
         "Working with Spring Boot 3.x, Spring Cloud (Gateway, Eureka, Config Server), Security, JPA/Hibernate 6, and microservices. Architected distributed systems with Saga, CQRS, and event-driven patterns. Recently migrated a monolith and 8 services from Boot 2.x to 3.x with zero downtime.",
       level: "Expert",
     },
     {
       title: "Full-Stack Development",
-      icon: "🚀",
       description:
         "Building modern web applications with Angular (v10-v20), React, TypeScript, and Spring Boot REST APIs. Delivered multilingual (i18n/RTL) UIs, reactive forms with RxJS/NgRx, and admin dashboards integrated with backend services.",
       level: "Expert",
     },
     {
       title: "Platform Modernization",
-      icon: "🔧",
       description:
         "Platform migrations are my thing. Spring Boot 2→3, Angular 10→20, Jakarta EE migrations. Always with zero downtime because production doesn't sleep. Built React-based admin dashboards for faster internal tooling delivery.",
       level: "Expert",
     },
     {
       title: "Performance Tuning",
-      icon: "⚡",
       description:
         "Fixed N+1 queries with fetch joins and entity graphs, added multi-level caching (Redis/Ehcache), optimized SQL and indexes. Cut response times by 35% and increased throughput by 40% in current role using Hibernate 6 and native SQL optimization.",
       level: "Expert",
     },
     {
       title: "Security & Multi-Tenancy",
-      icon: "🔐",
       description:
         "Keycloak integration with MFA, PKCE, custom IdPs, OAuth2/OpenID Connect, granular RBAC, Row-level security, Tenant-aware filters/ACLs, Secure multi-tenant architecture (shared schema)",
       level: "Advanced",
     },
     {
       title: "Event-Driven Architecture",
-      icon: "📡",
       description:
-        "Implemented inter-service communication via Kafka and RabbitMQ for distributed systems. Applied Saga orchestration, CQRS with event sourcing, and Outbox pattern for reliable async processing and transaction management.",
+        "Implemented inter-service communication via Kafka for distributed systems. Applied Saga orchestration, CQRS with event sourcing, and Outbox pattern for reliable async processing and transaction management.",
       level: "Advanced",
     },
   ],
@@ -151,7 +224,7 @@ export const resumeData: ResumeData = {
       approach: [
         "Domain-driven design to identify bounded contexts",
         "Strangler fig pattern for gradual migration",
-        "Event-driven architecture with Kafka and RabbitMQ",
+        "Event-driven architecture with Kafka",
         "Distributed tracing and monitoring",
         "Applied Saga and CQRS patterns for transaction management",
       ],
@@ -161,9 +234,7 @@ export const resumeData: ResumeData = {
         "Spring Boot",
         "Spring Cloud (Gateway, Eureka, Config Server)",
         "Kafka",
-        "RabbitMQ",
         "Docker",
-        "Kubernetes",
       ],
     },
   ],
@@ -218,9 +289,9 @@ export const resumeData: ResumeData = {
       {
         title: "Event-Driven Workflow Engine",
         description:
-          "Built configurable business process engine using Saga orchestration, CQRS and event sourcing patterns over Kafka/RabbitMQ for distributed transaction management",
+          "Built configurable business process engine using Saga orchestration, CQRS and event sourcing patterns over Kafka for distributed transaction management",
         impact: "60% faster approval workflows, reliable async processing",
-        tech: "Spring Boot, Kafka, RabbitMQ, Event Sourcing, Saga, CQRS",
+        tech: "Spring Boot, Kafka, Event Sourcing, Saga, CQRS",
       },
       {
         title: "React Admin Dashboards",
@@ -258,30 +329,28 @@ export const resumeData: ResumeData = {
   },
 
   skills: {
+    languages: ["Java", "JavaScript", "TypeScript", "SQL"],
     backend: [
-      "Java",
-      "Spring Boot 3.x",
-      "Spring Cloud (Gateway, Eureka, Config Server)",
+      "Spring Boot",
       "Spring Security",
-      "JPA/Hibernate 6",
-      "Microservices",
       "REST APIs",
+      "Microservices",
+      "JPA/Hibernate 6",
+      "Spring Cloud (Gateway, Eureka, Config Server)",
+      "Spring Modulith",
+      "Kafka",
       "Event-Driven Architecture",
-      "Saga",
-      "CQRS",
-      "Native SQL Optimization",
-      "Jakarta Migration",
+      "Reactive Programming",
     ],
     frontend: [
-      "Angular (v10-v20)",
+      "Angular",
       "React",
-      "TypeScript",
-      "JavaScript",
       "RxJS",
       "NgRx",
       "Reactive Forms",
       "i18n/RTL",
     ],
+    patterns: ["Saga", "CQRS", "Event Sourcing", "Circuit Breaker"],
     security: [
       "Keycloak",
       "OAuth2",
@@ -290,35 +359,11 @@ export const resumeData: ResumeData = {
       "MFA",
       "PKCE",
       "Custom IdP Integration",
-      "Multi-tenant Architecture",
     ],
-    data: [
-      "Oracle",
-      "PostgreSQL",
-      "MSSQL",
-      "MySQL",
-      "Native SQL Optimization",
-      "pgvector",
-    ],
-    performance: [
-      "Redis",
-      "Ehcache",
-      "Query Optimization",
-      "Indexing",
-      "N+1 Elimination",
-      "CompletableFuture",
-    ],
-    ai: ["LangChain4j", "RAG", "pgvector", "OpenAI API", "Vector Embeddings"],
-    devops: [
-      "Docker",
-      "Kubernetes",
-      "Maven",
-      "Git",
-      "Tomcat",
-      "IntelliJ IDEA",
-      "Kafka",
-      "RabbitMQ",
-    ],
+    performance: ["Redis", "Ehcache", "Performance Tuning", "Indexing"],
+    data: ["Oracle", "MSSQL", "MySQL", "PostgreSQL"],
+    devops: ["Docker", "Maven", "Git", "Tomcat", "IntelliJ IDEA"],
+    ai: ["LangChain4j", "RAG", "pgvector", "OpenAI API"],
   },
 
   projects: [
@@ -357,27 +402,6 @@ export const resumeData: ResumeData = {
       outcome:
         "Enables natural language querying over document collections with context-aware responses",
       tech: ["Java", "Spring Boot", "pgvector", "LangChain4j", "OpenAI API"],
-    },
-    {
-      name: "OrderFlow Microservices Platform",
-      description:
-        "Distributed microservices platform demonstrating service decomposition with Spring Cloud, Saga orchestration for distributed transactions, CQRS with event sourcing, and async messaging",
-      problem:
-        "Monolithic applications face scalability issues and tight coupling, making independent deployments and feature delivery challenging",
-      solution:
-        "Architected microservices platform using Spring Cloud (Gateway, Eureka, Config Server), implemented Saga orchestration and CQRS patterns, event-driven communication via Kafka/RabbitMQ, containerized with Docker and deployed on Kubernetes",
-      outcome:
-        "Achieved independent deployability, improved scalability, reliable async processing, and faster feature delivery with React-based admin dashboards",
-      tech: [
-        "Java",
-        "Spring Boot",
-        "Spring Cloud",
-        "Kafka",
-        "RabbitMQ",
-        "Docker",
-        "Kubernetes",
-        "React",
-      ],
     },
   ],
 };

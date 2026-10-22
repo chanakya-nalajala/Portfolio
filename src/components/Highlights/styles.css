@@ -1,79 +1,59 @@
 .highlights {
-  padding: var(--space-4xl) 0;
-  background-color: var(--color-surface);
+  padding-bottom: var(--space-3xl);
 }
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-xl);
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--color-line-strong);
+  border-bottom: 1px solid var(--color-line-strong);
 }
 
-.highlight-card {
-  text-align: center;
-  padding: var(--space-xl);
-  background-color: var(--color-background);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
-  cursor: default;
+.highlight {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  border-left: 1px solid var(--color-line);
 }
 
-.highlight-card:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.highlight-number {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  line-height: 1;
-  margin-bottom: var(--space-sm);
-  font-variant-numeric: tabular-nums;
+.highlight:first-child {
+  border-left: none;
+  padding-left: 0;
 }
 
 .highlight-label {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 0.25rem;
+  order: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.highlight-number {
+  order: 2;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  font-variant-numeric: lining-nums;
+  margin-bottom: var(--space-xs);
 }
 
 .highlight-subtext {
+  order: 3;
   font-size: 0.875rem;
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
-  .highlights {
-    padding: var(--space-3xl) 0;
-  }
-
   .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .highlight-card {
-    padding: var(--space-lg);
+  .highlight:nth-child(3) {
+    border-left: none;
+    padding-left: 0;
   }
 
-  .highlight-number {
-    font-size: 2.5rem;
-  }
-
-  .highlight-label {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .highlights-grid {
-    grid-template-columns: 1fr;
+  .highlight:nth-child(n + 3) {
+    border-top: 1px solid var(--color-line);
   }
 }

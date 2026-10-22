@@ -9,14 +9,37 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#6366f1" />
+    <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)" />
+
+    <!-- Apply the saved (or system) theme before first paint to avoid a flash -->
+    <script>
+      (function () {
+        var theme;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
 
     <!-- Primary Meta Tags -->
-    <title>Chanakya Nalajala | Senior Full-Stack Engineer - Java, Spring Boot, Angular, React</title>
-    <meta name="title" content="Chanakya Nalajala | Senior Full-Stack Engineer - Java, Spring Boot, Angular, React" />
+    <title>Chanakya Nalajala | Lead – Solution Engineer | Java, Spring Boot, Angular, React</title>
+    <meta name="title" content="Chanakya Nalajala | Lead – Solution Engineer | Java, Spring Boot, Angular, React" />
     <meta
       name="description"
-      content="Senior Full-Stack Engineer with 6+ years of experience building enterprise applications. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud. Specialized in platform migrations, performance optimization, and multi-tenant architectures."
+      content="Lead – Solution Engineer with 6+ years of experience building enterprise applications, leading a vertical of 10+ engineers across 18+ client accounts. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud. Specialized in platform migrations, performance optimization, and multi-tenant architectures."
     />
     <meta name="keywords" content="Java Developer, Spring Boot, Full-Stack Engineer, Angular, React, Microservices, Spring Cloud, Kafka, Software Engineer, Hyderabad, Enterprise Applications, Performance Optimization, Platform Migration, Keycloak, Multi-tenant Architecture" />
     <meta name="author" content="Chanakya Nalajala" />
@@ -24,26 +47,26 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://chanakya-nalajala.github.io/Portfolio/" />
-    <meta property="og:title" content="Chanakya Nalajala | Senior Full-Stack Engineer - Java, Spring Boot, Angular, React" />
+    <meta property="og:url" content="https://chanakya.got-a.page/" />
+    <meta property="og:title" content="Chanakya Nalajala | Lead – Solution Engineer | Java, Spring Boot, Angular, React" />
     <meta
       property="og:description"
-      content="Senior Full-Stack Engineer with 6+ years of experience building enterprise applications. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud."
+      content="Lead – Solution Engineer with 6+ years of experience building enterprise applications, leading a vertical of 10+ engineers across 18+ client accounts. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud."
     />
-    <meta property="og:image" content="https://chanakya-nalajala.github.io/Portfolio/og-image.svg" />
+    <meta property="og:image" content="https://chanakya.got-a.page/og-image.svg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://chanakya-nalajala.github.io/Portfolio/" />
-    <meta property="twitter:title" content="Chanakya Nalajala | Senior Full-Stack Engineer - Java, Spring Boot, Angular, React" />
+    <meta property="twitter:url" content="https://chanakya.got-a.page/" />
+    <meta property="twitter:title" content="Chanakya Nalajala | Lead – Solution Engineer | Java, Spring Boot, Angular, React" />
     <meta
       property="twitter:description"
-      content="Senior Full-Stack Engineer with 6+ years of experience building enterprise applications. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud."
+      content="Lead – Solution Engineer with 6+ years of experience building enterprise applications, leading a vertical of 10+ engineers across 18+ client accounts. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud."
     />
-    <meta property="twitter:image" content="https://chanakya-nalajala.github.io/Portfolio/og-image.svg" />
+    <meta property="twitter:image" content="https://chanakya.got-a.page/og-image.svg" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://chanakya-nalajala.github.io/Portfolio/" />
+    <link rel="canonical" href="https://chanakya.got-a.page/" />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -51,9 +74,9 @@
       "@context": "https://schema.org/",
       "@type": "Person",
       "name": "Chanakya Nalajala",
-      "url": "https://chanakya-nalajala.github.io/Portfolio/",
-      "image": "https://chanakya-nalajala.github.io/Portfolio/og-image.svg",
-      "jobTitle": "Senior Full-Stack Engineer",
+      "url": "https://chanakya.got-a.page/",
+      "image": "https://chanakya.got-a.page/og-image.svg",
+      "jobTitle": "Lead – Solution Engineer",
       "worksFor": {
         "@type": "Organization",
         "name": "Ascent Business Technologies"
@@ -64,7 +87,7 @@
         "addressRegion": "Telangana",
         "addressCountry": "India"
       },
-      "email": "chanakya.180@gmail.com",
+      "email": "chanakya180@gmail.com",
       "telephone": "+91-9490375485",
       "sameAs": [
         "https://www.linkedin.com/in/chanakya-nalajala/",
@@ -82,7 +105,7 @@
         "Performance Optimization",
         "Platform Migration"
       ],
-      "description": "Senior Full-Stack Engineer with 6+ years of experience building enterprise applications. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud. Specialized in platform migrations, performance optimization, and multi-tenant architectures."
+      "description": "Lead – Solution Engineer with 6+ years of experience building enterprise applications, leading a vertical of 10+ engineers across 18+ client accounts. Expert in Java, Spring Boot, Microservices, Angular, React, and Spring Cloud. Specialized in platform migrations, performance optimization, and multi-tenant architectures."
     }
     </script>
   </head>

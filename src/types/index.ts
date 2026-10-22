@@ -5,6 +5,8 @@ export interface PersonalInfo {
   location: string;
   email: string;
   phone: string;
+  linkedin: string;
+  github: string;
   summary: string;
   headline: string;
 }
@@ -17,7 +19,6 @@ export interface Highlight {
 
 export interface ExpertiseArea {
   title: string;
-  icon: string;
   description: string;
   level: string;
 }
@@ -54,19 +55,40 @@ export interface Project {
   tech: string[];
 }
 
+export interface Experience {
+  role: string;
+  company: string;
+  location: string;
+  start: string;
+  end: string;
+  highlights: string[];
+}
+
+export interface Education {
+  institution: string;
+  location: string;
+  degree: string;
+  start: string;
+  end: string;
+}
+
 export interface Skills {
+  languages: string[];
   backend: string[];
   frontend: string[];
+  patterns: string[];
   security: string[];
-  data: string[];
   performance: string[];
-  ai: string[];
+  data: string[];
   devops: string[];
+  ai: string[];
 }
 
 export interface ResumeData {
   personal: PersonalInfo;
   highlights: Highlight[];
+  experience: Experience[];
+  education: Education[];
   expertiseAreas: ExpertiseArea[];
   migrations: Migration[];
   engineeringDepth: EngineeringDepth;

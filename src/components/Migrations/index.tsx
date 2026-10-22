@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Migration } from "../../types";
+import SectionHeader from "../SectionHeader";
 import "./styles.css";
 
 interface MigrationsProps {
@@ -9,104 +10,147 @@ interface MigrationsProps {
 
 const Migrations: React.FC<MigrationsProps> = ({ migrations }) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const selected = migrations[selectedIndex];
 
   const contentVariants = {
-    hidden: { opacity: 0, x: -20 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+      y: 0,
+      transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
     },
     exit: {
       opacity: 0,
-      x: 20,
-      transition: { duration: 0.3 },
+      y: -8,
+      transition: { duration: 0.2 },
     },
   };
 
+  // Arrow keys move between tabs, per the WAI-ARIA tabs pattern.
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"];
+    if (!keys.includes(e.key)) return;
+    e.preventDefault();
+    const step = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : -1;
+    const next = (selectedIndex + step + migrations.length) % migrations.length;
+    setSelectedIndex(next);
+    tabRefs.current[next]?.focus();
+  };
+
   return (
-    <section className="section migrations" id="migrations">
+    <section className="section section-alt migrations" id="migrations">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Major Migrations I've Done</h2>
-          <p className="section-description">
-            Big version upgrades without breaking production
-          </p>
-        </motion.div>
+        <SectionHeader
+          index="03"
+          label="Migrations"
+          title="Major migrations I've led"
+          description="Big version upgrades without breaking production."
+        />
 
-        <div className="migrations-tabs">
-          {migrations.map((migration, index) => (
-            <button
-              key={index}
-              className={`migration-tab ${selectedIndex === index ? "active" : ""}`}
-              onClick={() => setSelectedIndex(index)}
-            >
-              <span className="migration-tab-title">{migration.title}</span>
-              <span className="migration-tab-timeline">
-                {migration.timeline}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedIndex}
-            className="migration-content"
-            variants={contentVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+        <div className="migrations-layout">
+          <div
+            className="migrations-tabs"
+            role="tablist"
+            aria-label="Migrations"
+            aria-orientation="vertical"
           >
-            <div className="migration-meta">
-              <div className="migration-meta-item">
-                <span className="meta-label">Timeline</span>
-                <span className="meta-value">{selected.timeline}</span>
-              </div>
-              <div className="migration-meta-item">
-                <span className="meta-label">Scope</span>
-                <span className="meta-value">{selected.scope}</span>
-              </div>
-            </div>
-
-            <div className="migration-section">
-              <h3 className="migration-section-title">Challenges</h3>
-              <ul className="migration-list">
-                {selected.challenges.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="migration-section">
-              <h3 className="migration-section-title">Approach</h3>
-              <ul className="migration-list">
-                {selected.approach.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="migration-impact">
-              <div className="impact-label">Impact</div>
-              <div className="impact-text">{selected.impact}</div>
-            </div>
-
-            <div className="migration-tech">
-              {selected.technologies.map((tech, i) => (
-                <span key={i} className="tech-badge">
-                  {tech}
+            {migrations.map((migration, index) => (
+              <button
+                key={migration.title}
+                ref={(el) => {
+                  tabRefs.current[index] = el;
+                }}
+                type="button"
+                role="tab"
+                id={`migration-tab-${index}`}
+                aria-selected={selectedIndex === index}
+                aria-controls="migration-panel"
+                tabIndex={selectedIndex === index ? 0 : -1}
+                className={`migration-tab ${selectedIndex === index ? "active" : ""}`}
+                onClick={() => setSelectedIndex(index)}
+                onKeyDown={handleKeyDown}
+              >
+                <span className="migration-tab-index mono-label">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+                <span className="migration-tab-text">
+                  <span className="migration-tab-title">{migration.title}</span>
+                  <span className="migration-tab-timeline mono-label">
+                    {migration.timeline}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div
+            className="migration-panel"
+            role="tabpanel"
+            id="migration-panel"
+            aria-labelledby={`migration-tab-${selectedIndex}`}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedIndex}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="migration-header">
+                  <h3 className="migration-title">{selected.title}</h3>
+                  <dl className="migration-meta">
+                    <div>
+                      <dt className="mono-label">Timeline</dt>
+                      <dd>{selected.timeline}</dd>
+                    </div>
+                    <div>
+                      <dt className="mono-label">Scope</dt>
+                      <dd>{selected.scope}</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div className="migration-columns">
+                  <div>
+                    <h4 className="migration-list-title mono-label">
+                      Challenges
+                    </h4>
+                    <ul className="migration-list">
+                      {selected.challenges.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="migration-list-title mono-label">
+                      Approach
+                    </h4>
+                    <ul className="migration-list">
+                      {selected.approach.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="migration-impact">
+                  <span className="mono-label">Impact</span>
+                  <p>{selected.impact}</p>
+                </div>
+
+                <div className="tag-list">
+                  {selected.technologies.map((tech) => (
+                    <span key={tech} className="tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   );
