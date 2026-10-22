@@ -1,30 +1,25 @@
-import React, { useState } from "react";
-import type { ResumeData } from "../../types";
-import { Download } from "../Icons";
+import { useState, type ComponentProps } from "react";
+import { Download, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import type { ResumeData } from "@/types";
 
-interface ResumeDownloadProps {
+interface ResumeDownloadProps
+  extends Omit<ComponentProps<typeof Button>, "onClick" | "children"> {
   data: ResumeData;
-  className?: string;
   label?: string;
-  labelClassName?: string;
-  // Rendered before the label, e.g. a row heading in the contact list.
-  prefix?: React.ReactNode;
 }
 
-type Status = "idle" | "loading" | "error";
-
-const ResumeDownload: React.FC<ResumeDownloadProps> = ({
+const ResumeDownload = ({
   data,
-  className,
   label = "Download resume",
-  labelClassName,
-  prefix,
-}) => {
-  const [status, setStatus] = useState<Status>("idle");
+  ...buttonProps
+}: ResumeDownloadProps) => {
+  const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    if (status === "loading") return;
-    setStatus("loading");
+    if (loading) return;
+    setLoading(true);
 
     try {
       // The PDF renderer is large, so it is only fetched when someone asks for the resume.
@@ -34,41 +29,41 @@ const ResumeDownload: React.FC<ResumeDownloadProps> = ({
       ]);
       const blob = await pdf(<ResumeDocument data={data} />).toBlob();
 
+      const fileName = `${data.personal.name.replace(/\s+/g, "_")}_Resume.pdf`;
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `${data.personal.name.replace(/\s+/g, "_")}_Resume.pdf`;
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 10_000);
 
-      setStatus("idle");
+      toast.success("Resume downloaded", { description: fileName });
     } catch (error) {
       console.error("Failed to generate resume PDF:", error);
-      setStatus("error");
+      toast.error("Couldn't generate the resume", {
+        description: "Please try again in a moment.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const text =
-    status === "loading"
-      ? "Preparing PDF…"
-      : status === "error"
-        ? "Couldn't generate, try again"
-        : label;
-
   return (
-    <button
-      type="button"
-      className={className}
+    <Button
+      {...buttonProps}
       onClick={handleClick}
-      aria-busy={status === "loading"}
-      disabled={status === "loading"}
+      disabled={loading}
+      aria-busy={loading}
     >
-      {prefix}
-      <span className={labelClassName}>{text}</span>
-      <Download />
-    </button>
+      {loading ? (
+        <Loader2 className="animate-spin" data-icon="inline-start" />
+      ) : (
+        <Download data-icon="inline-start" />
+      )}
+      {loading ? "Preparing PDF…" : label}
+    </Button>
   );
 };
 

@@ -1,46 +1,54 @@
-import React, { useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import type { Migration } from "../../types";
-import SectionHeader from "../SectionHeader";
-import "./styles.css";
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { AlertTriangle, CalendarDays, CheckCircle2, Route, TrendingUp } from "lucide-react";
+import { Badge } from "@/components/reui/badge";
+import {
+  Frame,
+  FrameHeader,
+  FramePanel,
+  FrameTitle,
+} from "@/components/reui/frame";
+import { IconTile } from "@/components/reui/icon-tile";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Reveal, staggerContainer, staggerItem } from "@/components/motion/reveal";
+import type { Migration } from "@/types";
 
 interface MigrationsProps {
   migrations: Migration[];
 }
 
-const Migrations: React.FC<MigrationsProps> = ({ migrations }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const selected = migrations[selectedIndex];
+const ListPanel = ({
+  title,
+  icon,
+  items,
+}: {
+  title: string;
+  icon: ReactNode;
+  items: string[];
+}) => (
+  <motion.div variants={staggerItem} className="flex">
+    <FramePanel>
+      <div className="mb-3 flex items-center gap-2 font-mono text-xs tracking-wide text-muted-foreground uppercase">
+        {icon}
+        {title}
+      </div>
+      <ul className="flex flex-col gap-2.5">
+        {items.map((entry) => (
+          <li key={entry} className="flex gap-2.5 text-sm leading-relaxed">
+            <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand" />
+            <span className="text-muted-foreground">{entry}</span>
+          </li>
+        ))}
+      </ul>
+    </FramePanel>
+  </motion.div>
+);
 
-  const contentVariants = {
-    hidden: { opacity: 0, y: 12 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-    },
-    exit: {
-      opacity: 0,
-      y: -8,
-      transition: { duration: 0.2 },
-    },
-  };
-
-  // Arrow keys move between tabs, per the WAI-ARIA tabs pattern.
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"];
-    if (!keys.includes(e.key)) return;
-    e.preventDefault();
-    const step = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : -1;
-    const next = (selectedIndex + step + migrations.length) % migrations.length;
-    setSelectedIndex(next);
-    tabRefs.current[next]?.focus();
-  };
-
+const Migrations = ({ migrations }: MigrationsProps) => {
   return (
-    <section className="section section-alt migrations" id="migrations">
-      <div className="container">
+    <section id="migrations" className="py-24 md:py-32">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <SectionHeader
           index="03"
           label="Migrations"
@@ -48,109 +56,91 @@ const Migrations: React.FC<MigrationsProps> = ({ migrations }) => {
           description="Big version upgrades without breaking production."
         />
 
-        <div className="migrations-layout">
-          <div
-            className="migrations-tabs"
-            role="tablist"
-            aria-label="Migrations"
-            aria-orientation="vertical"
-          >
-            {migrations.map((migration, index) => (
-              <button
-                key={migration.title}
-                ref={(el) => {
-                  tabRefs.current[index] = el;
-                }}
-                type="button"
-                role="tab"
-                id={`migration-tab-${index}`}
-                aria-selected={selectedIndex === index}
-                aria-controls="migration-panel"
-                tabIndex={selectedIndex === index ? 0 : -1}
-                className={`migration-tab ${selectedIndex === index ? "active" : ""}`}
-                onClick={() => setSelectedIndex(index)}
-                onKeyDown={handleKeyDown}
-              >
-                <span className="migration-tab-index mono-label">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="migration-tab-text">
-                  <span className="migration-tab-title">{migration.title}</span>
-                  <span className="migration-tab-timeline mono-label">
-                    {migration.timeline}
-                  </span>
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div
-            className="migration-panel"
-            role="tabpanel"
-            id="migration-panel"
-            aria-labelledby={`migration-tab-${selectedIndex}`}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedIndex}
-                variants={contentVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
-                <div className="migration-header">
-                  <h3 className="migration-title">{selected.title}</h3>
-                  <dl className="migration-meta">
-                    <div>
-                      <dt className="mono-label">Timeline</dt>
-                      <dd>{selected.timeline}</dd>
-                    </div>
-                    <div>
-                      <dt className="mono-label">Scope</dt>
-                      <dd>{selected.scope}</dd>
-                    </div>
-                  </dl>
-                </div>
-
-                <div className="migration-columns">
-                  <div>
-                    <h4 className="migration-list-title mono-label">
-                      Challenges
-                    </h4>
-                    <ul className="migration-list">
-                      {selected.challenges.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="migration-list-title mono-label">
-                      Approach
-                    </h4>
-                    <ul className="migration-list">
-                      {selected.approach.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="migration-impact">
-                  <span className="mono-label">Impact</span>
-                  <p>{selected.impact}</p>
-                </div>
-
-                <div className="tag-list">
-                  {selected.technologies.map((tech) => (
-                    <span key={tech} className="tag">
-                      {tech}
+        <Reveal>
+          <Tabs defaultValue={0} className="gap-6">
+            <div className="-mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+              <TabsList className="h-auto! w-max gap-1 rounded-xl p-1">
+                {migrations.map((migration, index) => (
+                  <TabsTrigger
+                    key={migration.title}
+                    value={index}
+                    className="h-auto rounded-lg px-3 py-2 text-left"
+                  >
+                    <span className="flex flex-col items-start gap-0.5">
+                      <span className="font-medium">{migration.title}</span>
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {migration.timeline}
+                      </span>
                     </span>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+
+            {migrations.map((migration, index) => (
+              <TabsContent key={migration.title} value={index}>
+                <Frame spacing="lg">
+                  <FrameHeader className="flex-row flex-wrap items-center justify-between gap-3">
+                    <FrameTitle className="text-base">{migration.title}</FrameTitle>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" radius="full" size="lg" className="gap-1.5">
+                        <CalendarDays />
+                        {migration.timeline}
+                      </Badge>
+                      <Badge variant="outline" radius="full" size="lg">
+                        {migration.scope}
+                      </Badge>
+                    </div>
+                  </FrameHeader>
+
+                  <motion.div
+                    className="grid gap-1 md:grid-cols-2"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <ListPanel
+                      title="Challenges"
+                      icon={<AlertTriangle className="size-3.5" />}
+                      items={migration.challenges}
+                    />
+                    <ListPanel
+                      title="Approach"
+                      icon={<Route className="size-3.5" />}
+                      items={migration.approach}
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.5 }}
+                  >
+                    <FramePanel className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                      <IconTile variant="soft" className="text-success">
+                        <TrendingUp />
+                      </IconTile>
+                      <div className="flex-1">
+                        <p className="font-mono text-xs tracking-wide text-muted-foreground uppercase">
+                          Impact
+                        </p>
+                        <p className="font-medium">{migration.impact}</p>
+                      </div>
+                    </FramePanel>
+                  </motion.div>
+
+                  <div className="flex flex-wrap gap-1.5 px-1 pt-2">
+                    {migration.technologies.map((tech) => (
+                      <Badge key={tech} variant="secondary" size="lg" className="font-mono font-normal">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </Frame>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </Reveal>
       </div>
     </section>
   );

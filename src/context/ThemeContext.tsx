@@ -23,11 +23,9 @@ export const useTheme = (): ThemeContextType => {
   return context;
 };
 
-// index.html sets data-theme before first paint (stored choice, else system preference).
+// index.html sets the .dark class before first paint (stored choice, else system preference).
 const getInitialTheme = (): Theme =>
-  document.documentElement.getAttribute("data-theme") === "light"
-    ? "light"
-    : "dark";
+  document.documentElement.classList.contains("dark") ? "dark" : "light";
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -37,7 +35,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    root.style.colorScheme = theme;
   }, [theme]);
 
   const toggleTheme = (): void => {

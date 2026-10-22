@@ -1,10 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import ThemeToggle from "../ThemeToggle";
-import "./styles.css";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Menu } from "lucide-react";
+import { Scrollspy } from "@/components/reui/scrollspy";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
+import ResumeDownload from "@/components/ResumeDownload";
+import { cn } from "@/lib/utils";
+import type { ResumeData } from "@/types";
 
 interface HeaderProps {
-  name: string;
+  resume: ResumeData;
 }
 
 const navItems = [
@@ -17,6 +30,9 @@ const navItems = [
   { label: "Contact", id: "contact" },
 ];
 
+// Distance from the top of the viewport at which a section counts as "current".
+const SCROLL_OFFSET = 96;
+
 const getInitials = (name: string): string =>
   name
     .split(" ")
@@ -25,115 +41,144 @@ const getInitials = (name: string): string =>
     .slice(0, 2)
     .toUpperCase();
 
-const Header: React.FC<HeaderProps> = ({ name }) => {
+const Header = ({ resume }: HeaderProps) => {
+  const { name } = resume.personal;
+  const documentRef = useRef<Document>(document);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Highlight the nav item for the section crossing the middle of the viewport.
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveId(entry.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-
-    // "top" (the hero) has no nav item, so reaching it clears the highlight.
-    ["top", ...navItems.map((item) => item.id)].forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isMenuOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsMenuOpen(false);
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [isMenuOpen]);
-
-  const closeMenu = () => setIsMenuOpen(false);
+  // Scrollspy reports the nearest section; ignore it while the hero is still on screen.
+  const handleSpyUpdate = (id: string) => {
+    const section = document.getElementById(id);
+    const reached =
+      section && section.getBoundingClientRect().top <= SCROLL_OFFSET + 1;
+    setActiveId(reached ? id : null);
+  };
 
   return (
-    <header className={`header ${isScrolled || isMenuOpen ? "scrolled" : ""}`}>
-      <div className="header-container">
-        <a href="#top" className="header-logo" onClick={closeMenu}>
-          <span className="header-monogram" aria-hidden="true">
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4"
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div
+        className={cn(
+          "mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 rounded-2xl border px-3 transition-all duration-300",
+          isScrolled
+            ? "border-border bg-background/75 shadow-lg shadow-black/5 backdrop-blur-xl dark:shadow-black/30"
+            : "border-transparent bg-transparent",
+        )}
+      >
+        <a href="#top" className="group flex items-center gap-2.5">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-foreground font-mono text-xs font-semibold text-background transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
             {getInitials(name)}
           </span>
-          <span className="header-name">{name}</span>
+          <span className="hidden text-sm font-semibold tracking-tight sm:inline">
+            {name}
+          </span>
         </a>
 
-        <div className="header-right">
-          <nav className="desktop-nav" aria-label="Primary">
+        <Scrollspy
+          targetRef={documentRef}
+          offset={SCROLL_OFFSET}
+          history={false}
+          onUpdate={handleSpyUpdate}
+          className="hidden items-center gap-0.5 lg:flex"
+        >
+          <nav aria-label="Primary" className="flex items-center gap-0.5">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`nav-link ${activeId === item.id ? "active" : ""}`}
+                data-scrollspy-anchor={item.id}
                 aria-current={activeId === item.id ? "true" : undefined}
+                className={cn(
+                  "relative rounded-lg px-3 py-1.5 text-sm transition-colors",
+                  activeId === item.id
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
               >
+                {activeId === item.id && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 -z-10 rounded-lg bg-muted"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                  />
+                )}
                 {item.label}
               </a>
             ))}
           </nav>
+        </Scrollspy>
+
+        <div className="flex items-center gap-1">
           <ThemeToggle />
-          <button
-            type="button"
-            className="menu-button"
-            onClick={() => setIsMenuOpen((open) => !open)}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav"
-          >
-            {isMenuOpen ? "Close" : "Menu"}
-          </button>
+          <ResumeDownload
+            data={resume}
+            label="Resume"
+            size="sm"
+            className="hidden sm:inline-flex"
+          />
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden"
+                  aria-label="Open menu"
+                />
+              }
+            >
+              <Menu />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72">
+              <SheetHeader>
+                <SheetTitle>Navigate</SheetTitle>
+              </SheetHeader>
+              <nav aria-label="Primary" className="flex flex-col px-4">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * index, duration: 0.3 }}
+                    className="border-b last:border-b-0"
+                  >
+                    <SheetClose
+                      render={
+                        <a
+                          href={`#${item.id}`}
+                          className="flex items-baseline gap-3 py-3 text-lg font-medium tracking-tight"
+                        />
+                      }
+                    >
+                      <span className="font-mono text-xs text-brand">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {item.label}
+                    </SheetClose>
+                  </motion.div>
+                ))}
+              </nav>
+              <div className="mt-auto p-4">
+                <ResumeDownload data={resume} className="w-full" size="lg" />
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
-            id="mobile-nav"
-            className="mobile-nav"
-            aria-label="Primary"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-          >
-            <div className="mobile-nav-inner">
-              {navItems.map((item, index) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="mobile-nav-link"
-                  onClick={closeMenu}
-                >
-                  <span className="mono-label">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
+    </motion.header>
   );
 };
 
